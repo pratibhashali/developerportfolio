@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+{% load static %}
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ about_me.name}}</title>
+    <link rel="shortcut icon" href={% static 'main/favicon.ico' %} type="image/x-icon" />
+    <link rel="icon" href={% static 'main/favicon.ico' %} type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet" />
+    <link rel="stylesheet" href={% static 'main/libs/font-awesome/css/font-awesome.min.css' %} />
+    <link href={% static 'main/css/styles.css' %} rel="stylesheet" />
+    <link href={% static 'main/css/bootstrap.min.css' %} rel="stylesheet" />
+</head>
+
+<body translate="no">
+    <div id="mobile-menu-open" class="shadow-large">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+    <!-- End #mobile-menu-toggle -->
+    <header>
+        <div id="mobile-menu-close">
+            <span>Close</span> <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+        <ul id="menu" class="shadow">
+            <li>
+                <a href="#about">About</a>
+            </li>
+            <li>
+                <a href="#publications">Publications</a>
+            </li>
+            <li>
+                <a href="#education">Education</a>
+            </li>
+            <li>
+                <a href="#experience">Experience</a>
+            </li>
+            <li>
+                <a href="#skills">Skills</a>
+            </li>
+            <li>
+                <a href="#achievements">Achievements</a>
+            </li>
+            <li>
+                <a href="#contact">Contact</a>
+            </li>
+        </ul>
+    </header>
+    <!-- End header -->
+
+    <div id="lead">
+        <div id="lead-content">
+            <h1>{{ about_me.name}}</h1>
+            <h2>
+                {{ about_me.my_summary }}
+            </h2>
+            <a href={{about_me.resume.path}} target="_blank" class="btn-rounded-white" download>Download Resume</a>
+        </div>
+        <!-- End #lead-content -->
+
+        <div id="lead-overlay"></div>
+
+        <div id="lead-down">
+            <span>
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </span>
+        </div>
+        <!-- End #lead-down -->
+    </div>
+    <!-- End #lead -->
+
+    <div id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2 class="heading">About Me</h2>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                        {{about_me.about_me}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End #about -->
+
+    <!-- Publication Starts -->
+    <div id="publications" class="background-alt">
+        <h2 class="heading">Publications</h2>
+
+        <div class="container">
+            <div class="row">
+                {% for publication in publications %}
+                <div class="publications shadow-large">
+                    <div class="publications-image">
+                        <img alt={% static 'main/images/research.jpg' %} src={% static 'main/images/research.jpg' %} />
+                    </div>
+                    <!-- End .publications-image -->
+                    <div class="publications-info">
+                        <h3>{{ publication.paper_title }}</h3>
+                        <p>
+                            {{ publication.paper_abstract }}
+                        </p>
+                        <a href="#">View Publication</a>
+                    </div>
+
+                    <!-- End .publications-info -->
+                </div>
+                {% endfor %}
+                <!-- End .publications -->
+            </div>
+        </div>
+
+    </div>
+    <!-- End #publications -->
+    <!-- Education Starts -->
+    <div id="education">
+        <h2 class="heading">Education</h2>
+        {% for education in educations %}
+        <div class="education-block">
+
+
+            <h3>{{education.college_name}}</h3>
+            <span class="education-date">{{education.start_date |date:"F Y"}} -
+                {{education.end_date |date:"F Y"}}</span>
+            <h4>{{education.degree}} {{education.stream}}</h4>
+            <ul>
+                {% for responsibility in education.educationresponsibilities_set.all %}
+
+                <li>
+                    {{responsibility.description}}
+                </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+        {% endfor %}
+        <!-- End .education-block -->
+    </div>
+    <!-- End #education -->
+
+    <!-- Experience Starts -->
+
+    <div id="experience" class="background-alt">
+        <h2 class="heading">Experience</h2>
+        <div id="experience-timeline">
+            {% for experience in experiences %}
+            <div data-date="September 2015 – September 2016">
+                <h3>{{experience.company_name}}</h3>
+                <h4>{{experience.profile}}</h4>
+                {% for responsibility in experience.experienceresponsibilities_set.all %}
+                <p>
+                    {{responsibility.description}}
+                </p>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- End #experience -->
+
+    <div id="skills">
+        <h2 class="heading">Skills</h2>
+        <ul>
+            {% for skill in skills %}
+            <li>{{skill}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <!-- End #skills -->
+
+    <!-- Achievement Starts -->
+    <div id="achievements" class="background-alt">
+        <h2 class="heading">Achievements</h2>
+        <div class="atimeline">
+            <ol>
+                {% for achievement in achievements %}
+                <li>
+                    <div>
+                        <time>{{achievement.time}}</time>
+                        {{achievement.description}}
+                    </div>
+                </li>
+                {% endfor %}
+
+                <li></li>
+            </ol>
+        </div>
+        <div class="arrows">
+            <button class="arrow arrow__prev disabled" disabled>
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/arrow_prev.svg" alt="prev atimeline arrow"
+                    class="black-button">
+            </button>
+            <button class="arrow arrow__next">
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/arrow_next.svg" alt="next atimeline arrow"
+                    class="black-button">
+            </button>
+        </div>
+        <!-- </section> -->
+    </div>
+
+    <!-- Achievement Ends -->
+
+    <div id="contact">
+        {% if messages %}
+        {% for message in messages %}
+        <div style="color: white; size: 1.2rem;">
+            {{message}}
+        </div>
+        {% endfor %}
+        {% endif %}
+        <h2>Get in Touch</h2>
+        <div id="contact-form">
+
+            <form method="post">
+                {% csrf_token %}
+                {% for field in contact_us%}
+                <!-- <label>{{ field.label }}</label> -->
+                {{ field}}
+                {% if field.errors %}
+                <div class="alert form_alert" style="color: white; size: 1.2rem;">
+                    {% for error in field.errors %}
+                    <p style="text-align: start;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% endfor %}
+                <!-- {{ contact_us.as_p }} -->
+                <button type="submit">Send</button>
+            </form>
+        </div>
+        <!-- End #contact-form -->
+    </div>
+    <!-- End #contact -->
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5 copyright">
+                    <p>
+                        Copyright &copy; 2020 {{about_me.name}}
+                    </p>
+                </div>
+                <div class="col-sm-2 top">
+                    <span id="to-top">
+                        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="col-sm-5 social">
+                    <ul>
+                        <li>
+                            <a href="https://github.com/" target="_blank"><i class="fa fa-github"
+                                    aria-hidden="true"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://stackoverflow.com/" target="_blank"><i class="fa fa-stack-overflow"
+                                    aria-hidden="true"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://linkedin.com/" target="_blank"><i class="fa fa-linkedin"
+                                    aria-hidden="true"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"
+                                    aria-hidden="true"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"
+                                    aria-hidden="true"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://plus.google.com/" target="_blank"><i class="fa fa-google-plus"
+                                    aria-hidden="true"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End footer -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js'></script>
+    <script src={% static 'main/js/achievement.js' %}></script>
+    <script src={% static 'main/js/scripts.js' %}></script>
+</body>
+
+</html>
