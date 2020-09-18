@@ -126,3 +126,8 @@ You can build the scss using following command
   I have used this template
   https://github.com/RyanFitzgerald/devportfolio
   
+
+
+# Demo
+
+![Developer Portfolio Demo](demo/DevPortfolio.gif)
