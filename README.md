@@ -8,7 +8,7 @@ Portfolio website for Developer using Python, Django, HTML, SCSS
 2. Create virtual environment for project and project dependencies so that it won't affect other projects. It is best practice to provide a dedicated environment for each Django project you create. 
 ``py -m venv project-name``
 
-   **Please note:** Everytime you start project after closing run this command 
+   **Please note:** Everytime you start project after closing activate your virtual environment for project. 
    #### **Please note:** Everytime you start project after closing IDE, system or project folder you have to/need to activate your virtual environment `` path_to_virtual_env_folder\script\activate.bat `` on windows and `` source path_to_virtual_env_folder\bin\activate `` on linux, otherwise dependency/packages install above will not work or there will some module not found errors.
  
 
